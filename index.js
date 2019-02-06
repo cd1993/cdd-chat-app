@@ -18,6 +18,12 @@ app.use(express.static('public'));
 var io = socket(server);
 
 // Listen for connection on the sockets. When a client connects to the server, the connection is made
+// This function is called whenever a connection is established
 io.on('connection', function(socket) {
     console.log(`Socket ( ${socket.id} ) connected.`);
+
+    // Listen for the front-end chatMessage being sent from the client
+    socket.on('chatMessage', function(data) {
+        console.log(data);
+    });
 });
